@@ -1,0 +1,11 @@
+jdbc:
+  url: "jdbc:postgresql://localhost:5432/databaseBank"
+  user: "postgres"
+  password: "qwerty"
+
+spring:
+  datasource:
+    username: "postgres"
+    password: "qwerty"
+    url: "jdbc:postgresql://localhost:5432/databaseBank"
+    driver-class: "org.postgresql.Driver"
