@@ -6,4 +6,5 @@ import org.vicary.model.Account;
 
 public interface AccountSpringJpaRepository extends JpaRepository<Account, Long> {
     Account findByCurrencyAndUser(String currency, User user);
+    //Account findById(Long id);
 }

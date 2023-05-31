@@ -1,5 +1,6 @@
 package org.vicary.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,6 +27,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
+    @JsonIgnore
     private List<Account> accounts;
 
     public User(String name, String lastname, String email) {

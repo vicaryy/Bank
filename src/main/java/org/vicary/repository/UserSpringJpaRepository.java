@@ -10,8 +10,10 @@ import org.vicary.model.User;
 import java.util.List;
 
 public interface UserSpringJpaRepository extends JpaRepository<User, Long> {
-    @Query("FROM User WHERE email = :email")
-    User findByEmail(@Param("email") String email);
+//    @Query("FROM User WHERE email = :email")
+//    User findByEmail(@Param("email") String email);
+
+    User findByEmail(String email);
 
     List<User> findByName(String name);
 
