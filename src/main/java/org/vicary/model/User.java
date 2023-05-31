@@ -12,11 +12,15 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
+    @Column(name = "user_id")
+    private Long id;
 
-    private String user_name;
+    @Column(name = "user_name")
+    private String name;
 
-    private String user_lastname;
+    @Column(name = "user_lastname")
+    private String lastname;
+
     @Column(name = "user_email")
     private String email;
 
@@ -24,9 +28,9 @@ public class User {
     @ToString.Exclude
     private List<Account> accounts;
 
-    public User(String user_name, String user_lastname, String email) {
-        this.user_name = user_name;
-        this.user_lastname = user_lastname;
+    public User(String name, String lastname, String email) {
+        this.name = name;
+        this.lastname = lastname;
         this.email = email;
     }
 }

@@ -1,6 +1,10 @@
 package org.vicary;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.vicary.model.Account;
 import org.vicary.model.User;
@@ -110,6 +114,23 @@ public class BankService {
         User user = userRepository.findByEmail(email);
         Account account = accountRepository.findByCurrencyAndUser(currency, user);
         accountRepository.delete(account);
+    }
+
+    public void testSpring(Scanner sc){
+//        List<User> users = userRepository.findByName("Wiktor");
+//        users.forEach(System.out::println);
+        System.out.println("--------------------------------------------");
+        System.out.println("--------------------------------------------");
+
+        Page<User> users = userRepository.findByName("Wiktor", PageRequest.of(0, 2, Sort.by("lastname").descending()));
+        System.out.println(users);
+        users.getContent().forEach(System.out::println);
+
+        for(int i = 1; i < users.getTotalPages(); i++) {
+            Page<User> user = userRepository.findByName("Wiktor", PageRequest.of(i, 2, Sort.by("lastname").descending()));
+            System.out.println(user);
+            user.getContent().forEach(System.out::println);
+        }
     }
 }
 
