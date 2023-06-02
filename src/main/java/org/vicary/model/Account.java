@@ -1,6 +1,5 @@
 package org.vicary.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,6 +7,8 @@ import lombok.*;
 @Table(name = "accounts")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
