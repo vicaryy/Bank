@@ -1,35 +1,29 @@
 package org.vicary.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.vicary.dto.AccountRequest;
-import org.vicary.dto.AccountResponse;
+import org.vicary.service.dto.AccountRequest;
+import org.vicary.service.dto.AccountResponse;
 import org.vicary.model.Account;
 import org.vicary.model.User;
 import org.vicary.repository.AccountRepository;
+import org.vicary.service.dto.CurrencyRateResponse;
+import org.vicary.service.map.AccountMapper;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
+@RequiredArgsConstructor
 public class AccountService {
 
-    private final AccountRepository accountRepository;
+    private final AccountRepository repository;
     private final UserService userService;
+    private final ExchangeService exchangeService;
     private final AccountMapper mapper;
 
-    @Autowired
-    public AccountService(AccountRepository accountRepository,
-                          UserService userService,
-                          AccountMapper mapper) {
-        this.accountRepository = accountRepository;
-        this.userService = userService;
-        this.mapper = mapper;
-    }
-
-
-
     public Account findById(Long id) {
-        return accountRepository.findById(id).get();
+        return repository.findById(id).get();
     }
 
     public AccountResponse findResponseById(Long id) {
@@ -38,33 +32,47 @@ public class AccountService {
     }
 
     public void createAccount(AccountRequest accountRequest) {
+        if(accountRequest.getAmount() < 0) throw new IllegalArgumentException("Amount has to be more than 0.");
+        if(accountRequest.getCurrency() == null) throw new IllegalArgumentException("Currency cannot be null.");
+        if(accountRequest.getCurrency().length() != 3) throw new IllegalArgumentException("Wrong currency.");
+        if(accountRequest.getUser_id() == null) throw new IllegalArgumentException("User_id cannot be null.");
+
         User user = userService.findUserById(accountRequest.getUser_id());
+        if(user == null) throw new NoSuchElementException("User does not exist.");
         Account account = mapper.map(accountRequest, user);
-        accountRepository.save(account);
+        repository.save(account);
     }
 
     public List<AccountResponse> showAccounts() {
-        List<Account> accounts = accountRepository.findAll();
+        List<Account> accounts = repository.findAll();
         return mapper.map(accounts);
     }
 
     public void deleteAccount(Long id) {
-        accountRepository.deleteById(id);
+        repository.deleteById(id);
     }
 
-    public void transferFunds(Long accountIdFrom, Long accountIdTo, double amount) {
+    public void transferFunds(long accountIdFrom, long accountIdTo, double amount) {
         if(amount <= 0) throw new IllegalArgumentException("Amount must be positive.");
         if(accountIdFrom == accountIdTo) throw new IllegalArgumentException("Accounts has to be different.");
         Account accountFrom = findById(accountIdFrom);
         Account accountTo = findById(accountIdTo);
-
         if(accountFrom.getAmount() - amount < 0) throw new IllegalArgumentException("Not enough funds.");
 
-        accountFrom.setAmount(accountFrom.getAmount() - amount);
-        accountTo.setAmount(accountTo.getAmount() + amount);
+        CurrencyRateResponse currencyRateResponse = exchangeService.getCurrencyRate(accountFrom.getCurrency());
+        double rate = currencyRateResponse.getConversionRates().get(accountTo.getCurrency());
 
-        accountRepository.save(accountFrom);
-        accountRepository.save(accountTo);
+        // USD 1.0 -> PLN 4.1898
+        // AMOUNT - $1000
+        // ACCOUNT1 = $2000 - $1000
+        // ACCOUNT2 = PLN5000 + $1000 * 4.1898
+
+
+        accountFrom.setAmount(accountFrom.getAmount() - amount);
+        accountTo.setAmount(accountTo.getAmount() + (amount * rate));
+
+        repository.save(accountFrom);
+        repository.save(accountTo);
     }
 }
 

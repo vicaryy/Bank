@@ -1,8 +1,8 @@
-package org.vicary.service;
+package org.vicary.service.map;
 
 import org.springframework.stereotype.Component;
-import org.vicary.dto.AccountRequest;
-import org.vicary.dto.AccountResponse;
+import org.vicary.service.dto.AccountRequest;
+import org.vicary.service.dto.AccountResponse;
 import org.vicary.model.Account;
 import org.vicary.model.User;
 

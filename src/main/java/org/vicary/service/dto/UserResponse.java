@@ -1,10 +1,9 @@
-package org.vicary.dto;
+package org.vicary.service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.vicary.model.Account;
 
 import java.util.List;
 
@@ -23,4 +22,11 @@ public class UserResponse {
     private String email;
 
     private List<Long> accounts;
+
+    public UserResponse(Long id, String name, String lastname, String email) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+    }
 }

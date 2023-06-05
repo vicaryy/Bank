@@ -1,16 +1,18 @@
-package org.vicary.dto;
+package org.vicary.service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserRequest {
-        private String name;
-        private String lastname;
-        private String email;
+@Builder
+public class AccountRequest {
+
+    private String currency;
+
+    private double amount;
+
+    private Long user_id;
 }

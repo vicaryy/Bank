@@ -1,8 +1,8 @@
-package org.vicary.service;
+package org.vicary.service.map;
 
 import org.springframework.stereotype.Component;
-import org.vicary.dto.UserRequest;
-import org.vicary.dto.UserResponse;
+import org.vicary.service.dto.UserRequest;
+import org.vicary.service.dto.UserResponse;
 import org.vicary.model.Account;
 import org.vicary.model.User;
 
@@ -14,16 +14,15 @@ import java.util.stream.Collectors;
 public class UserMapper {
 
     public UserResponse map(User user) {
+        List<Long> userIds = null;
+        if(user.getAccounts() != null) userIds = user.getAccounts().stream().map(Account::getAccount_id).collect(Collectors.toList());
         return UserResponse
                 .builder()
                 .id(user.getId())
                 .name(user.getName())
                 .lastname(user.getLastname())
                 .email(user.getEmail())
-                .accounts(user.getAccounts()
-                        .stream()
-                        .map(Account::getAccount_id)
-                        .collect(Collectors.toList()))
+                .accounts(userIds)
                 .build();
     }
 

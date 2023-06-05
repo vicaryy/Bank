@@ -1,4 +1,4 @@
-package org.vicary.dto;
+package org.vicary.service.dto;
 
 import lombok.*;
 

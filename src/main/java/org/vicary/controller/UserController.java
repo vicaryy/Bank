@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.vicary.dto.UserRequest;
+import org.vicary.service.dto.UserRequest;
 import org.vicary.service.UserService;
-import org.vicary.dto.UserResponse;
+import org.vicary.service.dto.UserResponse;
 
 import java.util.List;
 
