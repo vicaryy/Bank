@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.vicary.service.dto.UserRequest;
 import org.vicary.service.dto.UserResponse;
-import org.vicary.model.User;
+import org.vicary.entity.User;
 import org.vicary.repository.UserRepository;
 import org.vicary.service.map.UserMapper;
 

@@ -3,8 +3,8 @@ package org.vicary.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.vicary.service.dto.TransactionRequest;
-import org.vicary.model.Account;
-import org.vicary.model.TransactionEntity;
+import org.vicary.entity.Account;
+import org.vicary.entity.TransactionEntity;
 import org.vicary.repository.TransactionRepository;
 import org.vicary.service.map.TransactionMapper;
 
@@ -14,6 +14,7 @@ public class TransactionService {
     private final TransactionRepository repository;
     private final AccountService accountService;
     private final TransactionMapper mapper;
+
 
     public void createTransaction(TransactionRequest transactionRequest) {
         accountService.transferFunds(transactionRequest.getAccountIdFrom(), transactionRequest.getAccountIdTo(), transactionRequest.getAmount());

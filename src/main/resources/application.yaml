@@ -6,3 +6,5 @@ spring:
     driver-class: "org.postgresql.Driver"
   jpa:
     show-sql: false
+  jackson:
+    time-zone: Europe/Warsaw

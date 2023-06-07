@@ -1,11 +1,11 @@
-package serviceTest;
+package serviceTest.map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.vicary.service.dto.UserRequest;
 import org.vicary.service.dto.UserResponse;
-import org.vicary.model.Account;
-import org.vicary.model.User;
+import org.vicary.entity.Account;
+import org.vicary.entity.User;
 import org.vicary.service.map.UserMapper;
 
 import static org.junit.jupiter.api.Assertions.*;

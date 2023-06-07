@@ -1,4 +1,4 @@
-package org.vicary.model;
+package org.vicary.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

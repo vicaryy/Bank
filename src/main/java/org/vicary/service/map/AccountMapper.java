@@ -3,8 +3,8 @@ package org.vicary.service.map;
 import org.springframework.stereotype.Component;
 import org.vicary.service.dto.AccountRequest;
 import org.vicary.service.dto.AccountResponse;
-import org.vicary.model.Account;
-import org.vicary.model.User;
+import org.vicary.entity.Account;
+import org.vicary.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;

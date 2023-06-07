@@ -1,4 +1,4 @@
-package org.vicary.model;
+package org.vicary.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

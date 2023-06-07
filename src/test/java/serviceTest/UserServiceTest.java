@@ -3,7 +3,7 @@ package serviceTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.vicary.service.dto.UserRequest;
-import org.vicary.model.User;
+import org.vicary.entity.User;
 import org.vicary.repository.UserRepository;
 import org.vicary.service.map.UserMapper;
 import org.vicary.service.UserService;

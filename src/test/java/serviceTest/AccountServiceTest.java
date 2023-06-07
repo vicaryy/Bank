@@ -4,15 +4,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.vicary.service.ExchangeService;
 import org.vicary.service.dto.AccountRequest;
-import org.vicary.model.Account;
-import org.vicary.model.User;
+import org.vicary.entity.Account;
+import org.vicary.entity.User;
 import org.vicary.repository.AccountRepository;
 import org.vicary.service.dto.CurrencyRateResponse;
 import org.vicary.service.map.AccountMapper;
 import org.vicary.service.AccountService;
 import org.vicary.service.UserService;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
